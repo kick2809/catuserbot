@@ -15,7 +15,7 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="scam(?: |$)(.*)",
+    pattern="scam(?:\s|$)([\s\S]*)",
     command=("scam", plugin_category),
     info={
         "header": "To show fake actions for a paticular period of time",
@@ -79,7 +79,7 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="prankpromote(?: |$)(.*)",
+    pattern="prankpromote(?:\s|$)([\s\S]*)",
     command=("prankpromote", plugin_category),
     info={
         "header": "To promote a person without admin rights",
@@ -104,9 +104,9 @@ async def _(event):
     try:
         await event.client(EditAdminRequest(event.chat_id, user.id, new_rights, rank))
     except BadRequestError:
-        return await catevent.edit(NO_PERM)
+        return await catevent.edit("__I think you don't have permission to promote__")
     except Exception as e:
-        return await edit_delete(catevent, f"__{str(e)}__", time=10)
+        return await edit_delete(catevent, f"__{e}__", time=10)
     await catevent.edit("`Promoted Successfully! Now gib Party`")
 
 
