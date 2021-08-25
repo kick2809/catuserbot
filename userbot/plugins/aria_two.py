@@ -6,12 +6,12 @@ cmds: Magnet link : .magnet magnetLink
 	  Resume All Downloads: .ariaResume
 	  Pause All Downloads:  .ariaP
 By:- @Zero_cool7870"""
-import aria2p
 import asyncio
 import io
 import os
-from uniborg.util import admin_cmd
 
+import aria2p
+from uniborg.util import admin_cmd
 
 EDIT_SLEEP_TIME_OUT = 15
 # The port that RPC will listen on
@@ -43,18 +43,14 @@ async def aria_start(event):
     process = await asyncio.create_subprocess_exec(
         *aria2_daemon_start_cmd,
         stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE
+        stderr=asyncio.subprocess.PIPE,
     )
     stdout, stderr = await process.communicate()
     logger.info(stdout)
     logger.info(stderr)
     global aria2
     aria2 = aria2p.API(
-        aria2p.Client(
-            host="http://localhost",
-            port=ARIA2_STARTED_PORT,
-            secret=""
-        )
+        aria2p.Client(host="http://localhost", port=ARIA2_STARTED_PORT, secret="")
     )
     OUTPUT = f"**ARIA TWO C:**\n__PID:__\n`{process.pid}`\n\n**ARIA TWO STARTED**"
     await event.edit(OUTPUT)
@@ -99,10 +95,7 @@ async def torrent_download(event):
     # Add Torrent Into Queue
     try:
         download = aria2.add_torrent(
-            torrent_file_path,
-            uris=None,
-            options=None,
-            position=None
+            torrent_file_path, uris=None, options=None, position=None
         )
     except Exception as e:
         await event.edit(str(e))
@@ -172,8 +165,22 @@ async def show_all(event):
     downloads = aria2.get_downloads()
     msg = ""
     for download in downloads:
-        msg = msg + "File: `" + str(download.name) + "`\nSpeed: " + str(download.download_speed_string()) + "\nProgress: " + str(download.progress_string(
-        )) + "\nTotal Size: " + str(download.total_length_string()) + "\nStatus: " + str(download.status) + "\nETA:  " + str(download.eta_string()) + "\n\n"
+        msg = (
+            msg
+            + "File: `"
+            + str(download.name)
+            + "`\nSpeed: "
+            + str(download.download_speed_string())
+            + "\nProgress: "
+            + str(download.progress_string())
+            + "\nTotal Size: "
+            + str(download.total_length_string())
+            + "\nStatus: "
+            + str(download.status)
+            + "\nETA:  "
+            + str(download.eta_string())
+            + "\n\n"
+        )
     # print(msg)
     if len(msg) <= Config.MAX_MESSAGE_SIZE_LIMIT:
         await event.edit("`Current Downloads: `\n" + msg)
@@ -185,7 +192,7 @@ async def show_all(event):
                 out_file,
                 force_document=True,
                 allow_cache=False,
-                caption="`Output is huge. Sending as a file...`"
+                caption="`Output is huge. Sending as a file...`",
             )
             await event.delete()
 
@@ -221,7 +228,6 @@ async def check_progress_for_dl(gid, event):
                 return False
         except Exception as e:
             logger.info(str(e))
-            pass
     file = aria2.get_download(gid)
     complete = file.is_complete
     if complete:
