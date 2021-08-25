@@ -79,13 +79,17 @@ async def amireallyalive(event):
         )
 
 
-temp = """{ALIVE_TEXT}
-**{EMOJI} Database :** `{dbhealth}`
-**{EMOJI} Telethon Version :** `{telever}`
-**{EMOJI} Catuserbot Version :** `{catver}`
-**{EMOJI} Python Version :** `{pyver}`
-**{EMOJI} Uptime :** `{uptime}`
-**{EMOJI} Master:** {mention}"""
+temp = """{I'm RunninG SuccessFullY Like a Noob ✌️}
+┏━━━━━━━◉━━━━━━━━━━━━━━━━━━━━┓
+┃ 🧑‍💻-мαsтεя : 🅼🅰🅷🅴🆂 ⁪⁬⁮⁮☭
+┃ ⌛️µρ~ţɨʍ€ : 12h:29m:47s  ☭
+┗━━━━━━━◉━━━━━━━━━━━━━━━━━━━━┛
+╔ —————————————————————————————— ╗
+┃ 🔎Telethon version: 1.23.0🏴‍☠️
+┃ 🤖Bot Version: 3.0.3🤖
+┃ 🐍Python Version: 3.9.6💥
+┃ 🖥️Database: Functioning💥
+╚ ————————————————————————————— ╝
 
 
 @catub.cat_cmd(
